@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: laravel_app
+    container_name: smartleader_app
     restart: unless-stopped
     working_dir: /var/www
     volumes:
@@ -18,13 +18,13 @@ services:
 
   mysql:
     image: mysql:8.0
-    container_name: mysql
+    container_name: smartleader_mysql
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: smartleader
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
+      MYSQL_USER: smartleader
+      MYSQL_PASSWORD: smartleader
+      MYSQL_ROOT_PASSWORD: smartleader
     volumes:
       - mysql_data:/var/lib/mysql
     ports:
@@ -34,7 +34,7 @@ services:
 
   nginx:
     image: nginx:stable-alpine
-    container_name: nginx
+    container_name: smartleader_nginx
     restart: unless-stopped
     ports:
       - "8080:80"
@@ -57,7 +57,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: laravel_queue
+    container_name: smartleader_queue
     restart: unless-stopped
     working_dir: /var/www
     command: php artisan queue:work
