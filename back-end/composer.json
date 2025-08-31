@@ -12,6 +12,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "predis/predis": "^3.2",
+        "stancl/tenancy": "^3.6",
         "tymon/jwt-auth": "^1.0@dev"
     },
     "require-dev": {
