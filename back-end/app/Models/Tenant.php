@@ -8,4 +8,11 @@ use Stancl\Tenancy\Database\Concerns\HasDomains;
 class Tenant extends BaseTenant
 {
     use HasDomains;
+
+    protected $fillable = [
+        'id',
+        'name',
+        'cnpj',
+        'data'
+    ];
 }

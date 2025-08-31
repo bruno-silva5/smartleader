@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Mail\NewTaskNotification;
+use App\Mail\TaskCompletedNotification;
 use App\Validators\TaskValidator;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 
 class TaskController extends Controller
 {
@@ -24,6 +27,9 @@ class TaskController extends Controller
 
         $task = Task::create($data);
 
+        // Send email notification
+        Mail::to(auth()->user()->email)->queue(new NewTaskNotification($task));
+
         return response()->json($task, Response::HTTP_CREATED);
     }
 
@@ -39,6 +45,17 @@ class TaskController extends Controller
         $data = TaskValidator::validate(request()->all());
 
         $task->update($data);
+
+        return response()->json($task);
+    }
+
+    public function complete($id)
+    {
+        $task = Task::where('tenant_id', tenant('id'))->findOrFail($id);
+        $task->update(['status' => 'completed']);
+
+        // Send email notification
+        Mail::to(auth()->user()->email)->queue(new TaskCompletedNotification($task));
 
         return response()->json($task);
     }

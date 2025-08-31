@@ -35,6 +35,7 @@ Route::middleware([
     
         // Tasks routes
         Route::apiResource('tasks', TaskController::class);
+        Route::patch('tasks/{id}/complete', [TaskController::class, 'complete']);
     });
 
 });
