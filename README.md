@@ -67,21 +67,6 @@ docker-compose exec app php artisan jwt:secret
 - `PUT /api/tasks/{id}` - Atualiza uma tarefa
 - `DELETE /api/tasks/{id}` - Remove uma tarefa
 
-#### Parâmetros para Criação/Atualização de Tarefas
-```json
-{
-    "title": "string (obrigatório)",
-    "description": "string",
-    "status": "enum (pendente, em_andamento, concluida)",
-    "priority": "enum (baixa, media, alta)",
-    "due_date": "date"
-}
-```
-
-### Empresas (Tenants)
-- `GET /api/tenant` - Obtém informações da empresa atual
-- `PUT /api/tenant` - Atualiza informações da empresa
-
 ## 🔔 Notificações
 
 O sistema envia notificações por e-mail nos seguintes casos:
@@ -90,31 +75,13 @@ O sistema envia notificações por e-mail nos seguintes casos:
 
 As notificações são processadas de forma assíncrona utilizando filas (queues) para melhor performance.
 
-## 🛠️ Recursos Adicionais
-
-### Comandos Personalizados
-- `php artisan make:tenant` - Cria interativamente uma nova empresa e usuário admin
-- `php artisan queue:work` - Processa as filas de notificações
-
-### Filtros Disponíveis
-- Status da tarefa (pendente, em andamento, concluída)
-- Prioridade (baixa, média, alta)
-- Data limite
-
 ## 👥 Regras de Negócio
 
 - Usuários só podem acessar dados da própria empresa
 - Todas as operações requerem autenticação
-- Validação completa em todos os campos
 - Isolamento total de dados entre empresas
 
 ## 🔒 Segurança
 
 - Autenticação JWT
-- Proteção contra CSRF
-- Validação de dados em todas as requisições
 - Isolamento de dados por tenant
-
-## 📫 Suporte
-
-Para dúvidas ou sugestões, abra uma issue no repositório do projeto.
