@@ -36,7 +36,7 @@
 
 1. Clone o repositório
 ```bash
-git clone https://github.com/seu-usuario/smartleader.git
+git clone https://github.com/bruno-silva5/smartleader.git
 cd smartleader
 ```
 
